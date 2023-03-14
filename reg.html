@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registrazione</title>
+	<style>
+		.form-container {
+			max-width: 500px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			background-color: #f2f2f2;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		input[type="email"],
+		input[type="password"] {
+			width: 100%;
+			padding: 10px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-bottom: 20px;
+		}
+
+		button[type="submit"] {
+			display: block;
+			margin: 0 auto;
+			padding: 10px;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="form-container">
+		<h2>Registrazione</h2>
+		<form method="post">
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required>
+
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" required>
+
+			<button type="submit">Registrati</button>
+		</form>
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-auth.js"></script>
+	<script>
+		// Configurazione di Firebase
+		const firebaseConfig = {
+			apiKey: "AIzaSyDmKMvoR_GC98Ao1A531ZgR7dc6RPNm_co",
+			authDomain: "fpnhh-38265.firebaseapp.com",
+			projectId: "fpnhh-38265",
+			storageBucket: "fpnhh-38265.appspot.com",
+			messagingSenderId: "877519326201",
+			appId: "1:877519326201:web:c343b3f637b199ced4cb28"
+		};
+
+		firebase.initializeApp(firebaseConfig);
+
+		// Aggiunge l'event listener al form
+		document.querySelector("form").addEventListener("submit", (event) => {
+			event.preventDefault();
+
+			// Prende i valori dal form
+			const email = document.getElementById("email").value;
+			const password = document.getElementById("password").value;
+
+			// Crea un nuovo utente
+			firebase.auth().createUserWithEmailAndPassword(email, password)
+				.then((userCredential) => {
+					console.log("Registrazione effettuata con successo.");
+				})
+				.catch((error) => {
+					console.log("Errore nella registrazione:", error.message);
+				});
+		});
+	</script>
+</body>
+</html>
